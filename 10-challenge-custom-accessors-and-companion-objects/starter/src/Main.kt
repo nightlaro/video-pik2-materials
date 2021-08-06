@@ -19,7 +19,23 @@ Fill it with any magical ingredients you like!
 */
 
 class Wizard(var firstName: String, var lastName: String) {
-  val fullName = "$firstName $lastName"
+  companion object {
+    val commonMagicalIngredients = listOf("Eye of Newt", "Spider's egg")
+  }
+
+  var fullName
+    set(value) {
+      val firstAndLastProbably = value.split(" ")
+      if (firstAndLastProbably.size == 2) {
+        firstName = firstAndLastProbably.first()
+        lastName = firstAndLastProbably.last()
+      } else if (firstAndLastProbably.size != 2) {
+        println("Error you have too much names or you have less name or no need for middle name if you have one")
+      } else {
+        println("just give me first name and last name, thats it")
+      }
+    }
+    get() = "$firstName $lastName"
 }
 
 fun main() {
@@ -27,5 +43,9 @@ fun main() {
   println(wizard.fullName)
 
   wizard.lastName = "Skywalker"
+  println(wizard.fullName)
+  wizard.fullName = "kookoo koo koo"
+  println(wizard.fullName)
+  wizard.fullName = "Meek Kamehameha"
   println(wizard.fullName)
 }
