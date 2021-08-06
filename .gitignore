@@ -287,3 +287,7 @@ DerivedData/
 
 ## Gcc Patch
 /*.gcno
+
+## MY IGNORES
+lib
+.idea
