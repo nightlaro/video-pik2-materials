@@ -10,8 +10,8 @@ Challenge 1:
 */
 
 class IceCream {
-  val name: String
-  val ingredients: ArrayList<String>
+  var name: String = "Mickrazy"
+  val ingredients: ArrayList<String> by lazy { arrayListOf("Milk", "Sleep", "green flowers that can be made into strong ropes") }
 }
 
 /*
@@ -28,27 +28,42 @@ below with delegated property observer functionality:
 
 class SpaceCar(
     val make: String,
-    val color: String
-)
+    val color: String,
+    val battery: SpaceBattery
+) {
+    fun fly(am: Int) {
+        for (am in 0..am) {
+            battery.level -= 10
+        }
+    }
+}
 
 class SpaceBattery {
-    var level = 0.0
+    var lowCharge = false
+    var level by Delegates.observable(0.0) { _, old, new ->
+        lowCharge = new <= 10.0
+    }
 }
 
 fun main() {
   // ~~~Challenge 1~~~
   // Make a new instance of IceCream
-
+    val bestIceCream : IceCream = IceCream()
   // Give it a name other than the default
-
+    bestIceCream.name = "Mickrazy2.0"
   // Add some ingredients!
-
+    bestIceCream.ingredients += "Four" + "Two" + "Zero"
 
   // ~~~Challenge 2~~~
   // Make a SpaceCar!
-
+    val cybertruck = SpaceCar("VolleyTech", "Black", SpaceBattery())
   // Charge the battery!
-
+    cybertruck.battery.level = 100.0
   // Fly around for awhile.
-
+    cybertruck.fly(5)
+    println(cybertruck.battery.level)
+    println(cybertruck.battery.lowCharge)
+    cybertruck.fly(2)
+    println(cybertruck.battery.level)
+    println(cybertruck.battery.lowCharge)
 }
