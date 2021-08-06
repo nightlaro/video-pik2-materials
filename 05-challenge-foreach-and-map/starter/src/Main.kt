@@ -1,3 +1,4 @@
+
 // P01E05 Challenge forEach & map - Starter
 
 //// ----------------Starter Code----------------------
@@ -31,19 +32,23 @@ fun main() {
  Rewrite one of them using `forEach` and the other with `map`
 */
 
-  for (student in students) {
-    student.earnExtraCredit()
-  }
+//  for (student in students) {
+//    student.earnExtraCredit()
+//  }
+    students.forEach { it.earnExtraCredit() }
 
-  val classLibraryBooks: MutableList<List<String>> = mutableListOf()
-  for (student in students) {
-    classLibraryBooks.add(student.libraryBooks)
-  }
-
+//  val classLibraryBooks: MutableList<List<String>> = mutableListOf()
+//  for (student in students) {
+//    classLibraryBooks.add(student.libraryBooks)
+//  }
+    val mappedClassLibraryBooks = students.map { it.libraryBooks }
+    println("$mappedClassLibraryBooks")
 
 /*:
   Challenge 2 - mapNotNull
   Create a list of student pets
 */
 
+    val mapNotNullStudentPets = students.mapNotNull { it.pet }
+    println("$mapNotNullStudentPets")
 }
