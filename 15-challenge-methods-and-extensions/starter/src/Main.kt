@@ -12,14 +12,23 @@ an instance’s area by a growth factor. For example if you call
 **Hint**: Make `area` a `var` and add a setter to it.
 Math Hint: The math you want to calculate the radius in `area`s setter is `sqrt(area / PI)`
 */
+fun Double.square(): Double {
+  return this * this
+}
 
 class Circle(var radius: Double = 0.0) {
-  val area: Double
+  var area: Double = PI * radius * radius
+    set(value) {
+      field = sqrt(value / PI)
+    }
     get() {
-      return PI * radius * radius
+      return PI * radius.square() //holy shit
     }
 }
 
+fun Circle.grow(factor: Int) {
+  area *= factor
+}
 /*
 Challenge 2:
 Add the `isEven()` and `isOdd()` functions below as extension properties to `Int`
@@ -34,8 +43,20 @@ object MyMath {
   fun isOdd(number: Int) = number % 2 == 1
 }
 
+fun Int.isEven() {
+  MyMath.isEven(this)
+}
+fun Int.isOdd() {
+  MyMath.isOdd(this)
+}
+
 // Add Extension Properties here
 
 fun main() {
+  val circo = Circle(2.0)
+  circo.grow(3)
+  println("${circo.area}")
+
+  println(20.0.square())
 
 }
